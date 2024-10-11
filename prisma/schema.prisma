@@ -20,7 +20,7 @@ model User {
 
 model Recipe {
   id          String @id @default(uuid())
-  name        String
+  name        String @unique
   description String
   kkal        Float
   ingredients Recipe_Ingredients[]
@@ -32,13 +32,13 @@ model Recipe {
 
 model Category {
   id        String @id @default(uuid())
-  name      String 
+  name      String @unique
   recipe    Recipe[]
 }
 
 model Ingredient {
   id    String @id @default(uuid())
-  name  String
+  name  String @unique
   price Float
   kkal Float @default(0)
   recipes Recipe_Ingredients[]
@@ -46,8 +46,7 @@ model Ingredient {
 
 model Recipe_Ingredients {
   id            String @id @default(uuid())
-  recipe        Recipe @relation(fields: [recipeId], references: [id])
-  recipeId      String
+  recipe        Recipe[]
   ingredient    Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId  String
   quantity      Float
