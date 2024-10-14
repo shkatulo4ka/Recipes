@@ -32,37 +32,40 @@ const createRecipe = async(req, res) => {
         if (!name || !category || !ingredients) {
             return res.status(400).json({message: "Заполните обязательные поля"});
         }
-        const recipe = await prisma.user.update({
+        const categoryRecipe = await prisma.category.findUnique({
             where: {
-                id: req.user.id             //user приходит из auth
-            },
-            data: {
-                createdRecipes: {
-                    create: {
-                        name,
-                        category: await prisma.category.findUnique({
-                            where:{
-                                name: category
+                name: category
+            }
+        });
+
+        const ingredientsRecipe = await prisma.recipe_Ingredients.createMany(
+            Promise.all(req.ingredients.map(async i => {
+                return ({
+                    data: {
+                        ingredient: await prisma.ingredient.findUnique({
+                            where: {
+                                name: i.ingredient
                             }
                         }),
-                        ingredients: {      //!!!!сделать проверку на дубликаты - выбор существующей или создание новой записи или использовать upsert [{ create: {}, update{}}]
-                            createMany: {
-                                data: Promise.all(req.ingredients.map(async i => {
-                                    return ({
-                                        ingredient: await prisma.ingredient.findUnique({
-                                            where: {
-                                                name: i.ingredient
-                                            }
-                                        }),
-                                        quantity: i.quantity
-                                    })
-                                })),
-                                skipDuplicates: true,
-                            }
-                        },
-                        description: description ? description : ''
+                        quantity: i.quantity
                     }
-                }
+                })
+            }))
+        );
+
+        const userId = await prisma.user.findUnique({
+            where: {
+                id: req.user.id
+            }
+        });
+
+        const recipe = await prisma.recipe.create({
+            data: {
+                name,
+                category: categoryRecipe,
+                ingredients: ingredientsRecipe,
+                description: description ? description : '',
+                userId
             }
         });
 
@@ -75,13 +78,13 @@ const createRecipe = async(req, res) => {
 
 const deleteRecipe = async(req, res) => {
     try {
-        const recipe = await prisma.recipe.delete({
+        await prisma.recipe.delete({
             where: {
-                id: req.id
+                id: req.body.id
             }           
         });
 
-        res.status(200).json({message: "Рецепт удален"});
+        res.status(204).json({message: "Рецепт удален"});
     } catch (error) {
         res.status(400).json({message: "Не удалось удалить рецепт"});
     }
@@ -89,16 +92,18 @@ const deleteRecipe = async(req, res) => {
 
 const editRecipe = async(req, res) => {
     try {
+        const data = req.body;
+        const id = data.id;
         const recipe = await prisma.recipe.update({
             where: {
-                id: req.id
+                id
             },
-            
+            data            
         });
 
-        res.status(200).json(recipes);
+        res.status(204).json(recipe);
     } catch (error) {
-        res.status(400).json({message: "Не удалось получить рецепты"});
+        res.status(400).json({message: "Не удалось изменить рецепт"});
     }
 }
 
