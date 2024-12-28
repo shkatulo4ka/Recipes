@@ -1,8 +1,8 @@
 import { Ingredient } from "@prisma/client";
 import { Card, Form, Space } from "antd";
-import Input from "../Input/Input";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import Button from "../button/Button";
+import Input from "../../components/Input/Input";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import Button from "../../components/button/Button";
 
 type Props<T> = {
     onFinish: (values: T) => void;

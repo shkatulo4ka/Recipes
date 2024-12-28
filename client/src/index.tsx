@@ -13,6 +13,7 @@ import Auth from './features/auth/auth';
 import Recipes from './pages/recipes/Recipes';
 import Ingredients from './pages/ingredients/Ingredients';
 import AddIngredient from './pages/AddIngredient/AddIngredient';
+import Status from './pages/status/Status';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: Paths.ingredientAdd,
     element: <AddIngredient />
+  },
+  {
+    path: `${Paths.status}/:status`,
+    element: <Status />
   }
 ])
 

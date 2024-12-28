@@ -2,6 +2,8 @@ import { Ingredient } from '@prisma/client';
 import { api } from './api';
 import { addEmitHelper } from 'typescript';
 
+export type IngredientData = Omit<Ingredient, 'id'>;
+
 export const ingredientsApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getAllIngredients: builder.query<Ingredient[], void>({
@@ -17,8 +19,8 @@ export const ingredientsApi = api.injectEndpoints({
             })
         }),
         editIngredient: builder.mutation<string, Ingredient>({
-            query: (recipe) => ({
-                url: `/ingredients/edit/${recipe.id}`,
+            query: (ingredient) => ({
+                url: `/ingredients/edit/${ingredient.id}`,
                 method: 'PUT'
             })
         }),
@@ -29,7 +31,7 @@ export const ingredientsApi = api.injectEndpoints({
                 body: { id }
             })
         }),
-        addIngredient: builder.mutation<Ingredient, Ingredient>({
+        addIngredient: builder.mutation<IngredientData, IngredientData>({
             query: (ingredient) => ({
                 url: `/ingredients/add`,
                 method: 'POST',

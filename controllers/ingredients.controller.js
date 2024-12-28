@@ -26,7 +26,7 @@ const getIngredient = async(req, res) => {
 
 const createIngredient = async(req, res) => {
     try {
-        const {id, name, price, kkal} = req.body;
+        const {name, price, kkal} = req.body;
 
         if (!name) {
             return res.status(400).json({message: "Введите название ингредиента"});
@@ -34,7 +34,6 @@ const createIngredient = async(req, res) => {
 
         const ingredient = await prisma.ingredient.create({
             data: {
-                id,
                 name,
                 price,
                 kkal

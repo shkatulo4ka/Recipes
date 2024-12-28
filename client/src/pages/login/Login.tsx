@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
 import { UserData, useLoginMutation } from '../../app/services/auth'
 import { isErrorWithMessage } from '../../utils/is-error-with-message'
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ export const Login = () => {
               <Typography.Text>
                 Нет аккаунта? <Link to={Paths.register}>Регистрация</Link>
               </Typography.Text>
+              <ErrorMessage message={error}/>
             </Space>
           </Card>
         </Row>

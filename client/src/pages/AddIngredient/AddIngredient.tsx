@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout'
 import { Row } from 'antd'
-import IngredientForm from '../../components/IngredientForm/IngredientForm'
+import IngredientForm from '../IngredientForm/IngredientForm'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../features/auth/authSlice'

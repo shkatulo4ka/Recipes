@@ -1,9 +1,13 @@
-import React from 'react'
+import { Alert } from "antd";
 
-const ErrorMessage = () => {
-  return (
-    <div>ErrorMessage</div>
-  )
+type Props = {
+    message?: string;
+}
+
+const ErrorMessage = ({message}: Props) => {
+    if (!message) return null;
+
+    return <Alert message={message} type="error"/>
 }
 
 export default ErrorMessage
