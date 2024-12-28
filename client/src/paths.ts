@@ -5,5 +5,8 @@ export const Paths = {
     recipe: '/recipe',
     status: '/status',
     login: '/login',
-    register: '/register'
+    register: '/register',
+    ingredient: '/ingredients',
+    ingredientAdd: '/ingredients/add',
+    ingredientEdit: '/ingredients/edit'
 } as const;

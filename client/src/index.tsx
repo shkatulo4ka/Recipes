@@ -10,11 +10,13 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import { ConfigProvider, theme } from 'antd';
 import Auth from './features/auth/auth';
+import Recipes from './pages/recipes/Recipes';
+import Ingredients from './pages/ingredients/Ingredients';
 
 const router = createBrowserRouter([
   {
     path: Paths.home,
-    element: <h1>Recipes</h1>
+    element: <Recipes/>
   },
   {
     path: Paths.login,
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
     path: Paths.register,
     element: <Register />
   },
+  {
+    path: Paths.ingredient,
+    element: <Ingredients />
+  }
 ])
 
 const container = document.getElementById('root')!;
