@@ -8,5 +8,5 @@ export const Paths = {
     register: '/register',
     ingredient: '/ingredients',
     ingredientAdd: '/ingredients/add',
-    ingredientEdit: '/ingredients/edit'
+    ingredientEdit: '/ingredients/edit',
 } as const;

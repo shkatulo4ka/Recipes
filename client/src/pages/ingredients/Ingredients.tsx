@@ -41,7 +41,7 @@ const Ingredients = () => {
 
   return (
     <Layout>
-      <Button type="primary" onClick={ () => null} icon={ <PlusCircleOutlined />}>
+      <Button type="primary" onClick={ () => navigate('/ingredients/add')} icon={ <PlusCircleOutlined />}>
           Добавить
       </Button>
         <Table

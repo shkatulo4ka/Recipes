@@ -12,6 +12,7 @@ import { ConfigProvider, theme } from 'antd';
 import Auth from './features/auth/auth';
 import Recipes from './pages/recipes/Recipes';
 import Ingredients from './pages/ingredients/Ingredients';
+import AddIngredient from './pages/AddIngredient/AddIngredient';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: Paths.ingredient,
     element: <Ingredients />
+  },
+  {
+    path: Paths.ingredientAdd,
+    element: <AddIngredient />
   }
 ])
 
