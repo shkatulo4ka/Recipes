@@ -16,30 +16,12 @@ import AddIngredient from './pages/AddIngredient/AddIngredient';
 import Status from './pages/status/Status';
 
 const router = createBrowserRouter([
-  {
-    path: Paths.home,
-    element: <Recipes/>
-  },
-  {
-    path: Paths.login,
-    element: <Login/>
-  },
-  {
-    path: Paths.register,
-    element: <Register />
-  },
-  {
-    path: Paths.ingredient,
-    element: <Ingredients />
-  },
-  {
-    path: Paths.ingredientAdd,
-    element: <AddIngredient />
-  },
-  {
-    path: `${Paths.status}/:status`,
-    element: <Status />
-  }
+  {path: Paths.home, element: <Recipes/>},
+  {path: Paths.login,element: <Login/>},
+  {path: Paths.register, element: <Register />},
+  {path: Paths.ingredient, element: <Ingredients />},
+  {path: Paths.ingredientAdd, element: <AddIngredient />},
+  {path: `${Paths.status}/:status`, element: <Status />}
 ])
 
 const container = document.getElementById('root')!;

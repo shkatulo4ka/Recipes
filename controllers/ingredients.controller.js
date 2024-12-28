@@ -6,7 +6,7 @@ const getAllIngredients = async(req, res) => {
 
         res.status(200).json(ingredients);
     } catch (error) {
-        res.status(400).json({message: "Не удалось получить ингредиенты"});
+        res.status(400).json({message: "Не удалось получить ингредиенты", errorMessage: error.message});
     }
 }
 
@@ -20,16 +20,17 @@ const getIngredient = async(req, res) => {
 
         res.status(200).json(ingredient);
     } catch (error) {
-        res.status(400).json({message: "Не удалось получить рецепт"});
+        res.status(400).json({message: "Не удалось получить ингредиенты", errorMessage: error.message});
     }
 }
 
 const createIngredient = async(req, res) => {
     try {
         const {name, price, kkal} = req.body;
+        console.log(name, price, kkal);
 
         if (!name) {
-            return res.status(400).json({message: "Введите название ингредиента"});
+            return res.status(400).json({message: "Введите название ингредиента", errorMessage: error.message});
         }
 
         const ingredient = await prisma.ingredient.create({
@@ -43,7 +44,7 @@ const createIngredient = async(req, res) => {
         return res.status(201).json(ingredient);
 
     } catch (error) {
-        res.status(400).json({message: "Не удалось создать ингредиент"});
+        res.status(400).json({message: "Не удалось создать ингредиент", errorMessage: error.message});
     }
 }
 
@@ -57,7 +58,7 @@ const deleteIngredient = async(req, res) => {
 
         res.status(204).json({message: "Ингредиент удален"});
     } catch (error) {
-        res.status(400).json({message: "Не удалось удалить ингредиент"});
+        res.status(400).json({message: "Не удалось удалить ингредиент", errorMessage: error.message});
     }
 }
 

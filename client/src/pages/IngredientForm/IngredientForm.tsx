@@ -3,6 +3,7 @@ import { Card, Form, Space } from "antd";
 import Input from "../../components/Input/Input";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Button from "../../components/button/Button";
+import { IngredientData } from "../../app/services/ingredients";
 
 type Props<T> = {
     onFinish: (values: T) => void;
@@ -17,7 +18,7 @@ const IngredientForm = ({
     btnText,
     error,
     ingredient
-}: Props<Ingredient>) => {
+}: Props<IngredientData>) => {
   return (
     <Card title={title} style={{width:"30rem"}}>
         <Form name = "ingredient-form"

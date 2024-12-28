@@ -5,7 +5,7 @@ import IngredientForm from '../IngredientForm/IngredientForm'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../features/auth/authSlice'
-import { useAddIngredientMutation } from '../../app/services/ingredients'
+import { IngredientData, useAddIngredientMutation } from '../../app/services/ingredients'
 import { Ingredient } from '@prisma/client'
 import { Paths } from '../../paths'
 import { isErrorWithMessage } from '../../utils/is-error-with-message'
@@ -22,10 +22,11 @@ const AddIngredient = () => {
     }
   }, [navigate, user])
 
-  const handleAddIngredient = async (data: Ingredient) => {
+  const handleAddIngredient = async ({name, kkal, price}: IngredientData) => {
     try {
-      await addIngredient(data).unwrap();
+      await addIngredient({name, kkal: Number(kkal), price: Number(price)}).unwrap();
       navigate(`${Paths.status}/created`)
+      
     } catch (error) {
       const isError = isErrorWithMessage(error);
 

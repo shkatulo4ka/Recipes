@@ -2,7 +2,7 @@ export const Paths = {
     home: '/',
     recipeAdd: '/recipe/add',
     recipeEdit: '/recipe/edit',
-    recipe: '/recipe',
+    recipe: '/recipes',
     status: '/status',
     login: '/login',
     register: '/register',

@@ -31,9 +31,9 @@ export const ingredientsApi = api.injectEndpoints({
                 body: { id }
             })
         }),
-        addIngredient: builder.mutation<IngredientData, IngredientData>({
+        addIngredient: builder.mutation<Ingredient, IngredientData>({
             query: (ingredient) => ({
-                url: `/ingredients/add`,
+                url: `/ingredients`,
                 method: 'POST',
                 body: ingredient
             })

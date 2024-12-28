@@ -2,9 +2,9 @@ import { Button, Result, Row } from "antd";
 import { Link, useParams } from "react-router-dom"
 
 const Statuses: Record<string, string> = {
-    created: 'Успешно создан',
-    updated: 'Успешно обновлен',
-    deleted: 'Успешно удален'
+    created: 'Успешно создано',
+    updated: 'Успешно обновлено',
+    deleted: 'Успешно удалено'
 }
 
 const Status = () => {
