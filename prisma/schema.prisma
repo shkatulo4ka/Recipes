@@ -26,7 +26,8 @@ model Recipe {
   ingredients Recipe_Ingredients[]
   user        User                 @relation(fields: [userId], references: [id])
   userId      String
-  category    Category[]
+  categoryID  String?
+  category    Category?            @relation(fields: [categoryID], references: [id])
   created_at  DateTime             @default(now())
 }
 
@@ -46,7 +47,8 @@ model Ingredient {
 
 model Recipe_Ingredients {
   id           String     @id @default(uuid())
-  recipe       Recipe[]
+  recipeID     String?
+  recipe       Recipe?    @relation(fields: [recipeID], references: [id])
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId String
   quantity     Float?

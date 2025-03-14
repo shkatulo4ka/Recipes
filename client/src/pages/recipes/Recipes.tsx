@@ -4,11 +4,15 @@ import Layout from "../../components/layout/Layout"
 import {PlusCircleOutlined} from "@ant-design/icons";
 import { useGetAllRecipesQuery } from "../../app/services/recipes";
 import { ColumnsType } from "antd/es/table";
-import { Recipe } from "@prisma/client";
+import { Recipe, Ingredient } from "@prisma/client";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/auth/authSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+type RecipeExtra = Recipe & {
+    ingredients: Ingredient[]
+}
 
 const recipeColumns: ColumnsType<Recipe> = [
     {
@@ -19,7 +23,14 @@ const recipeColumns: ColumnsType<Recipe> = [
     {
         title: "Ингредиенты",
         dataIndex: "ingredients",
-        key: 'ingredients'
+        key: 'ingredients',
+        render: (i: Ingredient[]) => {
+            console.log(i);
+            return <>{
+                //@ts-ignore
+                i.map(f => f.ingredient.name).join(', ')
+            }</>
+        }
     },
     {
         title: "Приготовление",

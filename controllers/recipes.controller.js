@@ -2,7 +2,22 @@ const { prisma } = require("../prisma/prisma-client");
 
 const getAllRecipes = async(req, res) => {
     try {
-        const recipes = await prisma.recipe.findMany();
+        const recipes = await prisma.recipe.findMany({
+            select: {
+                id: true,
+                name: true,
+                user: true,
+                ingredients: {
+                    select: {
+                        ingredient: {
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
 
         res.status(200).json(recipes);
     } catch (error) {
@@ -23,6 +38,8 @@ const getRecipe = async(req, res) => {
         res.status(400).json({message: "Не удалось получить рецепт"});
     }
 }
+
+
 
 const createRecipe = async(req, res) => {
     try {

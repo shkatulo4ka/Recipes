@@ -1,6 +1,6 @@
 import { Recipe } from "@prisma/client";
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllRecipes, recipesApi } from "../../app/services/recipes";
+import { recipesApi } from "../../app/services/recipes";
 import { RootState } from "../../app/store";
 
 interface InitialState {
