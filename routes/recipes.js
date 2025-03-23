@@ -5,7 +5,7 @@ const { getAllRecipes, getRecipe, createRecipe, deleteRecipe, editRecipe } = req
 
 router.get('/', auth, getAllRecipes);
 router.get('/:id', auth, getRecipe);
-router.post('/', auth, createRecipe);
+router.post('/add', auth, createRecipe);
 router.delete('/remove/:id', auth, deleteRecipe);
 router.put('/edit/:id', auth, editRecipe);
 

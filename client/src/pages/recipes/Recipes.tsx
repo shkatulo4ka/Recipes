@@ -50,7 +50,7 @@ const Recipes = () => {
     }, [navigate, user])
   return (
     <Layout>
-      <Button type="primary" onClick={ () => null} icon={ <PlusCircleOutlined />}>
+      <Button type="primary" onClick={ () => navigate('/recipe/add')} icon={ <PlusCircleOutlined />}>
           Добавить
       </Button>
         <Table

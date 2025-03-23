@@ -14,6 +14,7 @@ import Recipes from './pages/recipes/Recipes';
 import Ingredients from './pages/ingredients/Ingredients';
 import AddIngredient from './pages/AddIngredient/AddIngredient';
 import Status from './pages/status/Status';
+import AddRecipe from './pages/AddRecipe/AddRecipe';
 
 const router = createBrowserRouter([
   {path: Paths.home, element: <Recipes/>},
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
   {path: Paths.register, element: <Register />},
   {path: Paths.ingredient, element: <Ingredients />},
   {path: Paths.ingredientAdd, element: <AddIngredient />},
-  {path: `${Paths.status}/:status`, element: <Status />}
+  {path: `${Paths.status}/:status`, element: <Status />},
+  {path: Paths.recipeAdd, element:<AddRecipe/>}
 ])
 
 const container = document.getElementById('root')!;

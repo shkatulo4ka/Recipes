@@ -2,6 +2,12 @@ import { Recipe } from '@prisma/client';
 import { api } from './api';
 import { addEmitHelper } from 'typescript';
 
+export type RecipeData = {
+    name: string;
+    description: string | null;
+    kkal: number | null;
+};
+
 export const recipesApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getAllRecipes: builder.query<Recipe[], void>({
@@ -29,7 +35,7 @@ export const recipesApi = api.injectEndpoints({
                 body: { id }
             })
         }),
-        addRecipe: builder.mutation<Recipe, Recipe>({
+        addRecipe: builder.mutation<Recipe, RecipeData>({
             query: (recipe) => ({
                 url: `/recipes/add`,
                 method: 'POST',

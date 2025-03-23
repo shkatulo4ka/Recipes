@@ -1,5 +1,11 @@
 const { prisma } = require("../prisma/prisma-client");
 
+/**
+ * @route GET /api/recipes
+ * @desc Получение всех рецептов
+ */
+
+
 const getAllRecipes = async(req, res) => {
     try {
         const recipes = await prisma.recipe.findMany({
@@ -25,6 +31,10 @@ const getAllRecipes = async(req, res) => {
     }
 }
 
+/**
+ * @route GET /api/recipes/:id
+ * @desc Получение одного рецепта
+ */
 const getRecipe = async(req, res) => {
     try {
         const recipe = await prisma.recipe.findUnique({
@@ -39,21 +49,26 @@ const getRecipe = async(req, res) => {
     }
 }
 
-
+/**
+ * @route POST /api/recipes/add
+ * @desc Добавление рецепта
+ */
 
 const createRecipe = async(req, res) => {
     try {
-        const {name, category, description, ingredients } = req.body;
+        const data = req.body;
         //const { ingredient, quantity } = ingredients;
 
-        if (!name || !category || !ingredients) {
-            return res.status(400).json({message: "Заполните обязательные поля"});
+        if (!data.name) {
+            return res.status(400).json({message: "Введите название рецепта"});
         }
-        const categoryRecipe = await prisma.category.findUnique({
-            where: {
-                name: category
-            }
-        });
+        /*if (data.category) {
+                const categoryRecipe = await prisma.category.findUnique({
+                where: {
+                    name: category
+                }
+            })
+        };
 
         const ingredientsRecipe = await prisma.recipe_Ingredients.createMany(
             Promise.all(req.ingredients.map(async i => {
@@ -74,15 +89,12 @@ const createRecipe = async(req, res) => {
             where: {
                 id: req.user.id
             }
-        });
+        });*/
 
         const recipe = await prisma.recipe.create({
             data: {
-                name,
-                category: categoryRecipe,
-                ingredients: ingredientsRecipe,
-                description: description ? description : '',
-                userId
+                ...data,
+                userId: req.user.id
             }
         });
 
@@ -93,6 +105,10 @@ const createRecipe = async(req, res) => {
     }
 }
 
+/**
+ * @route POST /api/recipes/remove/:id
+ * @desc Удаление рецепта
+ */
 const deleteRecipe = async(req, res) => {
     try {
         await prisma.recipe.delete({
@@ -107,6 +123,10 @@ const deleteRecipe = async(req, res) => {
     }
 }
 
+/**
+ * @route POST /api/recipes/edit/:id
+ * @desc Изменение рецепта
+ */
 const editRecipe = async(req, res) => {
     try {
         const data = req.body;
