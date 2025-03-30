@@ -6,6 +6,7 @@ export type RecipeData = {
     name: string;
     description: string | null;
     kkal: number | null;
+    categoryID?: string | null
 };
 
 export const recipesApi = api.injectEndpoints({

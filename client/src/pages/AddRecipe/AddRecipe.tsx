@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout'
-import { Row, Select } from 'antd'
+import { Row } from 'antd'
 import RecipeForm from '../RecipeForm/RecipeForm'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -22,7 +22,7 @@ const AddRecipe = () => {
     }
   }, [navigate, user])
 
-  const handleAddRecipe = async ({name, description, kkal}: RecipeData) => {
+  const handleAddRecipe = async ({name, description, kkal, categoryID}: RecipeData) => {
     try {
       await addRecipe({name, description, kkal: Number(kkal)}).unwrap();
       navigate(`${Paths.status}/created`)

@@ -9,4 +9,5 @@ export const Paths = {
     ingredient: '/ingredients',
     ingredientAdd: '/ingredients/add',
     ingredientEdit: '/ingredients/edit',
+    category: '/category'
 } as const;
