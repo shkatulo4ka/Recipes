@@ -23,6 +23,8 @@ const AddRecipe = () => {
   }, [navigate, user])
 
   const handleAddRecipe = async ({name, description, kkal, categoryID}: RecipeData) => {
+    console.log(name, description, kkal, categoryID);
+
     try {
       await addRecipe({name, description, kkal: Number(kkal)}).unwrap();
       navigate(`${Paths.status}/created`)

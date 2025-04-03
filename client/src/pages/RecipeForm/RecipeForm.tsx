@@ -1,9 +1,10 @@
-import { Recipe } from "@prisma/client";
-import { Card, Form, Space, Row } from "antd";
+
+import { Card, Form, Space} from "antd";
 import Input from "../../components/Input/Input";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Button from "../../components/button/Button";
 import {RecipeData } from "../../app/services/recipes";
+import { useGetAllCategoriesQuery } from '../../app/services/categories';
 import SelectCategory from "../../components/SelectCategory/SelectCategory";
 
 type Props<T> = {
@@ -20,6 +21,12 @@ const RecipeForm = ({
     error,
     recipe
 }: Props<RecipeData>) => {
+    const {data, isLoading} = useGetAllCategoriesQuery();
+    const options = data?.map(category => ({
+        value: category.id,
+        label: category.name
+    })) || [];
+
   return (
     <Card title={title} style={{width:"30rem"}}>
         <Form name = "recipe-form"
@@ -27,7 +34,9 @@ const RecipeForm = ({
             initialValues={recipe}>
                 <Input type="text" name="name" placeholder="Название"/>
                 
-                <SelectCategory name="category"/>
+                {isLoading ? <div>...</div> : <SelectCategory name="categoryID" options={options}/>}
+
+                <Input type="text" name="description" placeholder="Приготовление"/>
                 
                 <Space>
                     <ErrorMessage message={error}/>

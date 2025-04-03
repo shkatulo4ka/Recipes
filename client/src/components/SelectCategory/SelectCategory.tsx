@@ -1,23 +1,26 @@
 import { Select, Form } from 'antd'
 import { useGetAllCategoriesQuery } from '../../app/services/categories';
-import { Form } from 'react-router-dom';
+import { FC } from 'react';
 
+interface ISelectCategory {
+  name: string;
+  options: {
+    value: string;
+    label: string;
+}[]
+}
 
-const SelectCategory = ({}) => {
-    const {data} = useGetAllCategoriesQuery();
-    const options = data?.map(category => ({
-        value: category.id,
-        label: category.name
-    }))
+const SelectCategory: FC<ISelectCategory> = ({name,options}) => {
 
   return (
-    <Select
-        style={{width:"27rem", marginBottom: '20px'}}
-        // onSelect={handleCategorySelect}
-        allowClear={true}
-        placeholder="Выбери категорию"
-        options={options}
-    />
+    <Form.Item name={name}>
+      <Select
+          style={{width:"27rem"}}
+          allowClear={true}
+          placeholder="Выбери категорию"
+          options={options}
+      />
+    </Form.Item>
   )
 }
 
