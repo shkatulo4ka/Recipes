@@ -4,25 +4,25 @@ import { recipesApi } from "../../app/services/recipes";
 import { RootState } from "../../app/store";
 
 interface InitialState {
-    recipes: Recipe[] | null
+  recipes: Recipe[] | null;
 }
 
 const initialState: InitialState = {
-    recipes: null,
-}
+  recipes: null,
+};
 
 const slice = createSlice({
-    name: 'recipes',
-    initialState,
-    reducers: {
-        logout: () => initialState,
-    },
-    extraReducers: (builder) => {
-        builder.addMatcher(recipesApi.endpoints.getAllRecipes.matchFulfilled, (state, action) => {
-            state.recipes = action.payload;
-        })
-    }
-})
+  name: "recipes",
+  initialState,
+  reducers: {
+    logout: () => initialState,
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(recipesApi.endpoints.getAllRecipes.matchFulfilled, (state, action) => {
+      state.recipes = action.payload;
+    });
+  },
+});
 
 export default slice.reducer;
 
